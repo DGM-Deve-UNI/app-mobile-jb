@@ -4,6 +4,7 @@ import { colors } from "./src/styles/colors";
 module.exports = {
   content: ["./src/**/*.{ts,tsx}"],
   presets: [require("nativewind/preset")],
+  darkMode: "class", // <- ESSENCIAL para ativar dark mode por classe
   theme: {
     extend: {
       colors,
