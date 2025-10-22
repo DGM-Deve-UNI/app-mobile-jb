@@ -4,5 +4,20 @@
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
   },
-  "cSpell.words": ["appagendamentojb", "Entypo", "nativewind"]
+  "cSpell.words": [
+    "appagendamentojb",
+    "Calendario",
+    "concluido",
+    "Criacao",
+    "datetimepicker",
+    "Disponiveis",
+    "Entypo",
+    "nativewind",
+    "observacoes",
+    "Preco",
+    "servico",
+    "servicos",
+    "whatsapp",
+    "Whatsapp"
+  ]
 }

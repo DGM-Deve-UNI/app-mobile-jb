@@ -1,26 +1,33 @@
-import { StyleSheet } from "react-native";
-import { colors } from "./colors";
+// src/styles/tabBarStyles.ts
+import { useTheme } from "@/src/contexts/ThemeContext";
 
-export const tabBarStyles = StyleSheet.create({
-tabBar: {
-    backgroundColor: colors.white, // Cor de fundo
-    borderTopWidth: 1, // Linha superior
-    borderTopColor: colors.JB_amarelo_border, // Cor da linha superior
-    position: "absolute", // Posição absoluta para sobrepor o conteúdo
-    elevation: 0, // Remove sombra no Android
-    shadowOpacity: 0, // Remove sombra no iOS
-    height: 80, // Altura da tab bar
-    // paddingBottom: 10, // Espaçamento inferior
-    paddingTop: 8, // Espaçamento superior
-},
-label: {
-    fontSize: 16, // Altere aqui o tamanho da fonte
-    fontWeight: "700", // Altere aqui o peso da fonte
-    marginTop: 8,
-},
-});
+export const useTabBarStyles = () => {
+  const { isDark } = useTheme();
 
-export const tabBarColors = {
-  active: colors.JB_amarelo_ativo, // Active icon color
-  inactive: colors.JB_cinza, // Inactive icon color
+  const tabBarStyles = {
+    tabBar: {
+      backgroundColor: isDark ? "#1F2937" : "#FFFFFF", // substitui colors.white pelo dark ou light
+      borderTopWidth: 1,
+      borderTopColor: isDark ? "#374151" : "#E5E7EB", // substitui colors.JB_amarelo_border
+      position: "absolute",
+      elevation: 0,
+      shadowOpacity: 0,
+      height: 80, // mantido do primeiro código
+      // paddingBottom: 10, // comentado no primeiro, pode descomentar se quiser
+      paddingTop: 8,
+    },
+    label: {
+      fontSize: 16, // mantido do primeiro código
+      fontWeight: "700",
+      marginTop: 8,
+    },
+  };
+
+  const tabBarColors = {
+    active: isDark ? "#F59E0B" : "#D97706", // amarelo ativo dark/light (adaptado do segundo)
+    inactive: isDark ? "#9CA3AF" : "#6B7280", // cinza inactive dark/light
+  };
+
+  return { tabBarStyles, tabBarColors };
 };
+

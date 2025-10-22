@@ -1,21 +1,27 @@
+// src/app/_layout.tsx
 import React from "react";
 import { Tabs } from "expo-router";
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
-import { tabBarStyles, tabBarColors } from "@/src/styles/tabBarStyles";
+import { useTabBarStyles } from "@/src/styles/tabBarStyles";
 import { View } from "react-native";
-// ----------------------------------------------------------------------------
-export default function RootLayout() {
+import { ThemeProvider } from "@/src/contexts/ThemeContext";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
+// Componente que usa o hook dentro do ThemeProvider
+function TabNavigator() {
+  const { tabBarStyles, tabBarColors } = useTabBarStyles();
+
   return (
     <Tabs
       screenOptions={{
-        headerShown: false, // Oculta o cabeçalho padrão
-        tabBarStyle: tabBarStyles.tabBar, // Estilos personalizados para a tab bar
-        tabBarLabelStyle: tabBarStyles.label, // Estilos personalizados para os rótulos
-        tabBarActiveTintColor: tabBarColors.active, // Cor dos ícones ativos
-        tabBarInactiveTintColor: tabBarColors.inactive, // Cor dos ícones inativos
+        headerShown: false,
+        tabBarStyle: tabBarStyles.tabBar as any,
+        tabBarLabelStyle: tabBarStyles.label as any,
+        tabBarActiveTintColor: tabBarColors.active,
+        tabBarInactiveTintColor: tabBarColors.inactive,
       }}
     >
-  {/* --= Tela 1 =-- */}
+      {/* --= Tela 1 =-- */}
       <Tabs.Screen
         name="index"
         options={{
@@ -35,7 +41,7 @@ export default function RootLayout() {
           ),
         }}
       />
-  {/* --= Tela 2 =-- */}
+      {/* --= Tela 2 =-- */}
       <Tabs.Screen
         name="pages/agendamento"
         options={{
@@ -55,7 +61,7 @@ export default function RootLayout() {
           ),
         }}
       />
-  {/* --= Tela 3 =-- */}
+      {/* --= Tela 3 =-- */}
       <Tabs.Screen
         name="pages/perfil"
         options={{
@@ -76,5 +82,15 @@ export default function RootLayout() {
         }}
       />
     </Tabs>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <SafeAreaProvider>
+        <TabNavigator />
+      </SafeAreaProvider>
+    </ThemeProvider>
   );
 }

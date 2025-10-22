@@ -1,16 +1,23 @@
 import "@/src/styles/global.css";
 import React, { useState, useEffect, useCallback } from "react";
 import NewsCard from "@/src/components/NewsComponents/NewsCard";
-import { ActivityIndicator, RefreshControl, ScrollView, Text, View, } from "react-native";
+import {
+  ActivityIndicator,
+  RefreshControl,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import Constants from "expo-constants";
 import { NewsItem, NewsApiItem } from "@/src/types/news";
-
+import { useTheme } from "@/src/contexts/ThemeContext";
+// -----------------------------------------------------------------------------
 // Chave de API
 const API_KEY = Constants.expoConfig?.extra?.NEWS_DATA_API_KEY;
 const API_URL = `https://newsdata.io/api/1/news?apikey=${API_KEY}&language=pt&country=br`;
-
+// =============================================================================
 // Transforma o item da API no formato interno
 const mapApiToNewsItem = (apiItem: NewsApiItem, index: number): NewsItem => ({
   id: apiItem.article_id || `fallback-id-${index}`, // 👈 Garante key única
@@ -23,6 +30,7 @@ const mapApiToNewsItem = (apiItem: NewsApiItem, index: number): NewsItem => ({
 });
 
 export default function FeedNews() {
+  const { isDark } = useTheme();
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -73,10 +81,10 @@ export default function FeedNews() {
     setRefreshing(true);
     fetchNews(true);
   }, [fetchNews]);
-
+  // =============================================================================
   return (
     <ScrollView
-      className="flex-1 px-5 py-4"
+      className={`flex-1 px-5 py-4 ${isDark ? "bg-gray-900" : "bg-white"}`}
       contentContainerStyle={{
         paddingBottom: tabBarHeight + insets.bottom + 24,
       }}
@@ -84,31 +92,53 @@ export default function FeedNews() {
         <RefreshControl
           refreshing={refreshing}
           onRefresh={onRefresh}
-          tintColor="#6b7280"
+          tintColor={isDark ? "#eab308" : "#6b7280"}
+          colors={[isDark ? "#eab308" : "#2563eb"]}
         />
       }
     >
-      <Text className="text-3xl font-bold mb-4 text-gray-800">
+      <Text
+        className={`text-3xl font-bold mb-4 ${
+          isDark ? "text-white" : "text-gray-800"
+        }`}
+      >
         Últimas Notícias
       </Text>
 
       {loading ? (
         <View className="flex-1 justify-center items-center py-10">
-          <ActivityIndicator size="large" color="#2563eb" />
-          <Text className="mt-2 text-lg text-gray-600">
+          <ActivityIndicator
+            size="large"
+            color={isDark ? "#eab308" : "#2563eb"}
+          />
+          <Text
+            className={`mt-2 text-lg ${
+              isDark ? "text-gray-300" : "text-gray-600"
+            }`}
+          >
             Carregando notícias...
           </Text>
         </View>
       ) : news.length > 0 ? (
-        news.map((item) => <NewsCard key={item.id} news={item} />)
+        news.map((item) => (
+          <NewsCard key={item.id} news={item} isDark={isDark} />
+        ))
       ) : (
         <View className="py-10 flex items-center">
-          <Text className="text-xl font-semibold text-gray-500">
+          <Text
+            className={`text-xl font-semibold ${
+              isDark ? "text-gray-400" : "text-gray-500"
+            }`}
+          >
             {API_KEY
               ? "Nenhuma notícia encontrada."
               : "Chave de API não configurada."}
           </Text>
-          <Text className="text-base text-gray-500 mt-2">
+          <Text
+            className={`text-base mt-2 ${
+              isDark ? "text-gray-500" : "text-gray-500"
+            }`}
+          >
             Puxe para recarregar ou verifique a configuração.
           </Text>
         </View>
@@ -116,8 +146,19 @@ export default function FeedNews() {
 
       {!loading && news.length > 0 && (
         <View className="py-4 flex items-center">
-          <Text className="text-lg font-semibold text-gray-500">
+          <Text
+            className={`text-lg font-semibold ${
+              isDark ? "text-gray-400" : "text-gray-500"
+            }`}
+          >
             Você chegou ao final do feed
+          </Text>
+          <Text
+            className={`text-sm mt-1 ${
+              isDark ? "text-gray-500" : "text-gray-400"
+            }`}
+          >
+            Arraste para atualizar
           </Text>
         </View>
       )}
