@@ -1,6 +1,5 @@
 // src/hooks/useAgendamentos.ts
 import { useState } from "react";
-import { Alert } from "react-native";
 import {
   Agendamento,
   AgendamentoFormData,

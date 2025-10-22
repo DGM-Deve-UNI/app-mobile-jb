@@ -16,7 +16,7 @@ interface DateTimeStepProps {
   onNext: () => void;
   onBack: () => void;
   isDark: boolean;
-  horasOptions: Array<{ label: string; value: string }>;
+  horasOptions: { label: string; value: string }[];
 }
 
 export const DateTimeStep: React.FC<DateTimeStepProps> = ({

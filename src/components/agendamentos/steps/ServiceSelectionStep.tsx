@@ -12,8 +12,8 @@ interface ServiceSelectionStepProps {
   onProfissionalChange: (value: string) => void;
   onNext: () => void;
   isDark: boolean;
-  servicosOptions: Array<{ label: string; value: string }>;
-  profissionaisOptions: Array<{ label: string; value: string }>;
+  servicosOptions: { label: string; value: string }[];
+  profissionaisOptions: { label: string; value: string }[];
 }
 
 export const ServiceSelectionStep: React.FC<ServiceSelectionStepProps> = ({

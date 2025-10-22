@@ -1,6 +1,6 @@
 import React from "react";
 import "@/src/styles/global.css";
-import { Text, ScrollView } from "react-native";
+import { Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   setStatusBarStyle,
