@@ -1,4 +1,4 @@
-// types/profile.types.ts
+// Tipos e interfaces relacionados ao perfil do usuário
 import { Ionicons } from "@expo/vector-icons";
 
 export type IconName = keyof typeof Ionicons.glyphMap;

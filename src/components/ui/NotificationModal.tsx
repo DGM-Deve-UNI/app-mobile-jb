@@ -1,3 +1,4 @@
+// Modal de notificação reutilizável com diferentes tipos (info, warning, error, success)
 import React from "react";
 import { View, Text } from "react-native";
 import { BaseModal } from "./BaseModal";

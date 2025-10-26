@@ -1,96 +1,74 @@
 // src/app/_layout.tsx
 import React from "react";
-import { Tabs } from "expo-router";
-import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useTabBarStyles } from "@/src/styles/tabBarStyles";
-import { View } from "react-native";
-import { ThemeProvider } from "@/src/contexts/ThemeContext";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-
-// Componente que usa o hook dentro do ThemeProvider
-function TabNavigator() {
-  const { tabBarStyles, tabBarColors } = useTabBarStyles();
-
-  return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: tabBarStyles.tabBar as any,
-        tabBarLabelStyle: tabBarStyles.label as any,
-        tabBarActiveTintColor: tabBarColors.active,
-        tabBarInactiveTintColor: tabBarColors.inactive,
-      }}
-    >
-      {/* --= Tela 1 =-- */}
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ size, color, focused }) => (
-            <View
-              className={`w-20 h-9 rounded-full items-center justify-center ${
-                focused ? "bg-yellow-400" : ""
-              }`}
-            >
-              <Feather
-                name="home"
-                size={size}
-                color={focused ? "#fff" : color}
-              />
-            </View>
-          ),
-        }}
-      />
-      {/* --= Tela 2 =-- */}
-      <Tabs.Screen
-        name="pages/agendamento"
-        options={{
-          title: "Agendamentos",
-          tabBarIcon: ({ color, focused }) => (
-            <View
-              className={`w-20 h-9 rounded-full items-center justify-center ${
-                focused ? "bg-yellow-400" : ""
-              }`}
-            >
-              <MaterialCommunityIcons
-                name="calendar"
-                size={24}
-                color={focused ? "#fff" : color}
-              />
-            </View>
-          ),
-        }}
-      />
-      {/* --= Tela 3 =-- */}
-      <Tabs.Screen
-        name="pages/perfil"
-        options={{
-          title: "Perfil",
-          tabBarIcon: ({ size, color, focused }) => (
-            <View
-              className={`w-20 h-9 rounded-full items-center justify-center ${
-                focused ? "bg-yellow-400" : ""
-              }`}
-            >
-              <Feather
-                name="user"
-                size={size}
-                color={focused ? "#fff" : color}
-              />
-            </View>
-          ),
-        }}
-      />
-    </Tabs>
-  );
-}
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { ActivityIndicator, View, Text } from "react-native";
+import { ThemeProvider, useTheme } from "@/src/contexts/ThemeContext";
+import { AuthProvider, useAuth } from "@/src/contexts/AuthContext";
 
 export default function RootLayout() {
   return (
     <ThemeProvider>
-      <SafeAreaProvider>
-        <TabNavigator />
-      </SafeAreaProvider>
+      <AuthProvider>
+        <SafeAreaProvider>
+          <StatusBar style="auto" />
+          <RootStack />
+        </SafeAreaProvider>
+      </AuthProvider>
     </ThemeProvider>
+  );
+}
+
+function RootStack() {
+  const { user, isLoading } = useAuth();
+  const { isDark } = useTheme();
+
+  // 🔹 Loader enquanto carrega o estado do usuário (Splash)
+  if (isLoading) {
+    return (
+      <SafeAreaView
+        className={`flex-1 justify-center items-center ${isDark ? "bg-gray-900" : "bg-white"}`}
+      >
+        <View className="items-center">
+          <ActivityIndicator
+            size="large"
+            color={isDark ? "#eab308" : "#2563eb"}
+          />
+          <Text
+            className={`mt-3 text-lg font-medium ${
+              isDark ? "text-gray-300" : "text-gray-700"
+            }`}
+          >
+            Carregando...
+          </Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  // 🔹 Navegação principal
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        animation: "none", // remove animação de transição
+        contentStyle: { backgroundColor: isDark ? "#111827" : "#ffffff" }, // 🔹 fundo da Stack
+      }}
+    >
+      {/* Rotas protegidas para usuário logado */}
+      <Stack.Protected guard={!!user}>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack.Protected>
+
+      {/* Rotas para usuário não logado */}
+      <Stack.Protected guard={!user}>
+        <Stack.Screen
+          name="login"
+          options={{ headerShown: false, animation: "none" }}
+        />
+        {/* Adicione cadastro, onboarding, confirmar etc aqui */}
+      </Stack.Protected>
+    </Stack>
   );
 }

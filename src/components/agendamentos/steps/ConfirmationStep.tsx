@@ -1,4 +1,4 @@
-// src/components/agendamentos/steps/ConfirmationStep.tsx
+// Passo de Confirmação do Agendamento
 import React from "react";
 import { View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

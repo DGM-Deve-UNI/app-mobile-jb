@@ -1,8 +1,10 @@
+// Componente EditProfileModal para editar o perfil do usuário com campos de formulário e ações de salvar/cancelar
 import React from "react";
 import { BaseModal } from "@/src/components/ui/BaseModal";
 import { FormInput } from "@/src/components/ui/FormInput";
 import { Button } from "@/src/components/ui/Button";
 import { UserData } from "@/src/types/profile.types";
+import { View } from "react-native";
 
 // Defina a interface aqui
 export interface EditProfileModalProps {
@@ -40,7 +42,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
       successMessage={successMessage}
       isDark={isDark}
       actions={
-        <>
+        <View className="flex-row justify-end gap-3 mt-4">
           <Button
             title="Cancelar"
             onPress={onClose}
@@ -53,7 +55,7 @@ export const EditProfileModal: React.FC<EditProfileModalProps> = ({
             variant="primary"
             isDark={isDark}
           />
-        </>
+        </View>
       }
     >
       {Object.entries(editFields).map(([key, label]) => (

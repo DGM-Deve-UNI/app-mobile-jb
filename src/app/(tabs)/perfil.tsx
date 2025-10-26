@@ -1,7 +1,9 @@
+// Tela de Perfil do Usuário com opções de edição, notificações e tema
 import React from "react";
 import { View, ScrollView, Text } from "react-native";
 import { useTheme } from "@/src/contexts/ThemeContext";
 import { useProfile } from "@/src/hooks/useProfile";
+import { useAuth } from "@/src/contexts/AuthContext";
 import {
   ProfileHeader,
   UserCard,
@@ -11,9 +13,12 @@ import {
   NotificationsModal,
 } from "@/src/components/PerfilComponents";
 import { ProfileOption } from "@/src/types/profile.types";
+import { Button } from "@/src/components/ui/Button";
 
 const Perfil: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
+  const { logout } = useAuth(); // função de logout do AuthContext
+
   const {
     userData,
     notifications,
@@ -97,26 +102,42 @@ const Perfil: React.FC = () => {
 
           <PersonalInfo personalInfo={personalInfo} />
 
+          {/* Botão de Logout */}
         </ScrollView>
-          {/* Footer dentro do ScrollView mas com margin */}
-          <View
-            className={`py-4 mt-8 mb-24`}
-          >
-            <Text
-              className={`text-center font-semibold text-base ${
-                isDark ? "text-zinc-50" : "text-zinc-500"
-              }`}
-            >
-              JohnBravo®
-            </Text>
-            <Text
-              className={`text-center text-xs opacity-70 ${
-                isDark ? "text-zinc-100" : "text-zinc-400"
-              }`}
-            >
-              Versão 1.0.0
-            </Text>
+          <View className="mb-6 px-6">
+            <Button
+              title="Sair"
+              onPress={logout}
+              // variant="outline"
+              size="medium"
+              iconSize={20}
+              textSize={20}
+              isDark={isDark}
+              icon="log-out"
+            />
           </View>
+
+        {/* Footer */}
+        <View
+          className={`px-6 py-4 border-t ${
+            isDark ? "border-gray-700" : "border-gray-200"
+          }`}
+        >
+          <Text
+            className={`text-center font-semibold ${
+              isDark ? "text-gray-400" : "text-gray-500"
+            }`}
+          >
+            App by JohnBravo®
+          </Text>
+          <Text
+            className={`text-center text-sm mt-1 ${
+              isDark ? "text-gray-500" : "text-gray-400"
+            }`}
+          >
+            Versão: 1.0.0.0
+          </Text>
+        </View>
       </View>
 
       {/* Modal de edição de dados */}

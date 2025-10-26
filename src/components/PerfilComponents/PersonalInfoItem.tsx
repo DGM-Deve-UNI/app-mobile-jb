@@ -1,4 +1,4 @@
-// components/PersonalInfoItem.tsx
+// Componente PersonalInfoItem para exibir itens de informação pessoal com suporte a temas claro e escuro
 import React from "react";
 import { View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

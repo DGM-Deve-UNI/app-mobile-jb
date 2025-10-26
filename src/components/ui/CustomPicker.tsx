@@ -1,3 +1,4 @@
+// Componente CustomPicker reutilizável com suporte a temas claro e escuro
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Modal, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

@@ -1,4 +1,4 @@
-// src/hooks/useAgendamentos.ts
+// Hook personalizado para gerenciar agendamentos no aplicativo JohnBravo - useAgendamentos hook para lógica de agendamento e validação de formulário
 import { useState } from "react";
 import {
   Agendamento,

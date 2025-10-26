@@ -1,4 +1,4 @@
-// src/screens/Agendamentos.tsx
+// Tela principal de Agendamentos com múltiplas etapas e histórico de agendamentos
 import React, { useState } from "react";
 import {
   View,
@@ -195,7 +195,7 @@ export default function Agendamentos() {
         contentContainerStyle={{ flexGrow: 1 }}
       >
         {/* Botão Ver Histórico */}
-        {agendamentos.length > 0 && !showHistory && (
+        {/* {agendamentos.length > 0 && !showHistory && (
           <View className="mb-6">
             <Button
               title="📋 Ver Meus Agendamentos"
@@ -206,7 +206,7 @@ export default function Agendamentos() {
               icon="list"
             />
           </View>
-        )}
+        )} */}
 
         {/* Modo Histórico */}
         {showHistory ? (

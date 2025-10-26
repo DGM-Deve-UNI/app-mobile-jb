@@ -1,4 +1,4 @@
-// src/components/agendamentos/AppointmentDetailsModal.tsx
+// Componente AppointmentDetailsModal para exibir detalhes do agendamento em um modal
 import { BaseModal } from "@/src/components/ui/BaseModal";
 import { Button } from "@/src/components/ui/Button";
 import { Agendamento } from "@/src/types/agendamento";

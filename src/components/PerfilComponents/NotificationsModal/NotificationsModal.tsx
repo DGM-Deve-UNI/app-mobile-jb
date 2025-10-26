@@ -1,5 +1,6 @@
+// Componente NotificationsModal para gerenciar configurações de notificações do usuário
 import React from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { BaseModal } from "@/src/components/ui/BaseModal";
 import { NotificationSetting } from "@/src/components/ui/NotificationSetting";
 import { Button } from "@/src/components/ui/Button";
@@ -65,7 +66,7 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({
       successMessage={successMessage}
       isDark={isDark}
       actions={
-        <>
+        <View className="flex-row justify-end gap-3 mt-4">
           <Button
             title="Cancelar"
             onPress={onClose}
@@ -78,11 +79,11 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({
             variant="primary"
             isDark={isDark}
           />
-        </>
+        </View>
       }
     >
       <Text
-        className={`${isDark ? "text-gray-400" : "text-gray-600"} mb-5 text-sm leading-5`}
+        className={`${isDark ? "text-gray-400" : "text-gray-600"} mb-5 text-lg leading-5`}
       >
         Selecione quais notificações você deseja receber:
       </Text>

@@ -1,3 +1,4 @@
+// Componente CustomSelect reutilizável com suporte a temas claro e escuro
 import React from "react";
 import { View, Text, TouchableOpacity, Modal, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

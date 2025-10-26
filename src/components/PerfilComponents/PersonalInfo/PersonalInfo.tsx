@@ -1,15 +1,16 @@
+// Componente PersonalInfo para exibir informações pessoais com suporte a temas claro e escuro
 import React from "react";
 import { View, Text } from "react-native";
 import { useTheme } from "@/src/contexts/ThemeContext";
-import { PersonalInfoItem } from "../PersonalInfoItem";
+import { PersonalInfoItem } from "@/src/components/PerfilComponents/PersonalInfoItem";
 
 // Defina a interface aqui
 export interface PersonalInfoProps {
-  personalInfo: Array<{
+  personalInfo: {
     icon: string;
     label: string;
     value: string;
-  }>;
+  }[];
 }
 
 export const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalInfo }) => {
@@ -17,7 +18,7 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({ personalInfo }) => {
 
   return (
     <View
-      className={`${isDark ? "bg-gray-800" : "bg-white"} p-5 rounded-2xl border ${
+      className={`${isDark ? "bg-gray-800" : "bg-white"} p-5 pb-0 rounded-2xl border ${
         isDark ? "border-gray-700" : "border-gray-200"
       } shadow-md`}
     >

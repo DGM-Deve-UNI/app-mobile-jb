@@ -1,4 +1,4 @@
-// src/components/agendamentos/steps/CustomerDataStep.tsx
+// Componente CustomerDataStep para coleta de dados do cliente com suporte a temas claro e escuro
 import React from "react";
 import { View, Text, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

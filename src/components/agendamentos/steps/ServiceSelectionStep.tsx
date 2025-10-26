@@ -1,4 +1,4 @@
-// src/components/agendamentos/steps/ServiceSelectionStep.tsx
+// Componente ServiceSelectionStep para seleção de serviço e profissional com suporte a temas claro e escuro
 import React from "react";
 import { View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

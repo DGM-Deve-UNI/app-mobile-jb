@@ -1,4 +1,4 @@
-// src/components/agendamentos/steps/DateTimeStep.tsx
+// Componente DateTimeStep para seleção de data e horário com suporte a temas claro e escuro
 import React from "react";
 import { View, Text, TouchableOpacity, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

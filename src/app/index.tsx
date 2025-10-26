@@ -1,38 +1,10 @@
-import React from "react";
-import "@/src/styles/global.css";
-import { Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  setStatusBarStyle,
-  setStatusBarBackgroundColor,
-} from "expo-status-bar";
-import Header from "@/src/components/headerFeed";
-import FeedNews from "@/src/components/NewsComponents/FeedNews";
-import { useTheme } from "@/src/contexts/ThemeContext";
+// import { Redirect } from "expo-router";
 
-// -----------------------------------------------------------------------------
-export default function Index() {
-  const { isDark } = useTheme();
-
-  // Configura o StatusBar quando o tema muda
-  React.useEffect(() => {
-    setStatusBarStyle(isDark ? "light" : "dark");
-    setStatusBarBackgroundColor(isDark ? "#1F2937" : "#FFFFFF", true);
-  }, [isDark]);
-
-  return (
-    <SafeAreaView className={`flex-1 ${isDark ? "bg-gray-900" : "bg-white"}`}>
-      <Header />
-
-      <Text
-        className={`text-2xl font-semibold px-6 py-4 ${
-          isDark ? "text-white" : "text-gray-500"
-        }`}
-      >
-        Olá, User 👋🏼
-      </Text>
-
-      <FeedNews />
-    </SafeAreaView>
-  );
-}
+// // Este arquivo é o ponto de entrada principal do seu app ("/").
+// // Ele redireciona IMEDIATAMENTE para o fluxo de autenticação.
+// // A rota "/login" é resolvida pelo seu grupo (auth)/login.tsx
+// // O app/_layout.tsx (Guardião) irá interceptar e decidir se o usuário
+// // deve ficar no Login ou ser redirecionado para o Home (Tabs).
+// export default function IndexRedirect() {
+//   return <Redirect href="/login" />;
+// }

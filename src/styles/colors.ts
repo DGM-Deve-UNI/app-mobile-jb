@@ -1,3 +1,4 @@
+// Cores usadas no aplicativo JohnBravo
 export const colors = {
   white: "#FFFFFF",
   black: "#000000",

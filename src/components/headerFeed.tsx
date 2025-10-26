@@ -1,3 +1,4 @@
+// Componente Header com suporte a temas claro e escuro
 import React from "react";
 import "@/src/styles/global.css";
 import { Text, View, TouchableOpacity } from "react-native";

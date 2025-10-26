@@ -1,7 +1,8 @@
+// Componente ProfileOptions para exibir uma lista de opções de perfil com suporte a temas claro e escuro
 import React from "react";
 import { View } from "react-native";
 import { useTheme } from "@/src/contexts/ThemeContext";
-import { ListItem } from "../ListItem";
+import { ListItem } from "@/src/components/PerfilComponents/ListItem";
 import { ProfileOption } from "@/src/types/profile.types";
 
 // Defina a interface aqui

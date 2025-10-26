@@ -1,3 +1,4 @@
+// Hook personalizado para gerenciar perfil de usuário no aplicativo JohnBravo - useProfile hook para lógica de edição de perfil e notificações
 import { useState } from "react";
 import { UserData, NotificationSettings } from "@/src/types/profile.types";
 

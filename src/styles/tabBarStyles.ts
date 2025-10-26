@@ -1,4 +1,4 @@
-// src/styles/tabBarStyles.ts
+// Estilos dinâmicos para a Tab Bar com suporte a temas claro e escuro
 import { useTheme } from "@/src/contexts/ThemeContext";
 
 export const useTabBarStyles = () => {
@@ -9,7 +9,7 @@ export const useTabBarStyles = () => {
       backgroundColor: isDark ? "#1F2937" : "#FFFFFF", // substitui colors.white pelo dark ou light
       borderTopWidth: 1,
       borderTopColor: isDark ? "#374151" : "#E5E7EB", // substitui colors.JB_amarelo_border
-      position: "absolute",
+      // position: "absolute",
       elevation: 0,
       shadowOpacity: 0,
       height: 80, // mantido do primeiro código

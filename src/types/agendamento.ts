@@ -1,4 +1,4 @@
-// src/types/agendamento.ts
+// Tipos relacionados a agendamentos no aplicativo JohnBravo - Agendamento, dados do formulário e erros de validação de formulário
 export interface Agendamento {
   id: string;
   servico: string;

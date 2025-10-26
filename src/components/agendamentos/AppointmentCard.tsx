@@ -1,4 +1,4 @@
-// src/components/agendamentos/AppointmentCard.tsx
+// Card de Agendamento
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -73,6 +73,7 @@ export const AppointmentCard: React.FC<AppointmentCardProps> = ({
           name="chevron-forward"
           size={16}
           color={isDark ? "#9CA3AF" : "#6B7280"}
+          accessibilityLabel="Ver detalhes do agendamento"
         />
       </View>
     </TouchableOpacity>

@@ -1,55 +1,77 @@
-{
-  "expo": {
-    "name": "Agendamento JohnBravo",
-    "slug": "app-agendamento-jb",
-    "version": "1.2.0",
-    "orientation": "portrait",
-    "icon": "./src/assets/images/icon.png",
-    "scheme": "appagendamentojb",
-    "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./src/assets/images/android-icon-foreground.png",
-        "backgroundImage": "./src/assets/images/android-icon-background.png",
-        "monochromeImage": "./src/assets/images/android-icon-monochrome.png"
+  {
+    "expo": {
+      "name": "Agendamento JohnBravo",
+      "slug": "app-agendamento-jb",
+      "version": "1.2.0",
+      "orientation": "portrait",
+      "icon": "./src/assets/images/icon.png",
+      "scheme": "appagendamentojb",
+      "userInterfaceStyle": "automatic",
+      "newArchEnabled": true,
+      "ios": {
+        "supportsTablet": true
       },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
-    },
-    "web": {
-      "output": "static",
-      "favicon": "./src/assets/images/favicon.png",
-      "bundler": "metro"
-    },
-    "extra": {
-      "NEWS_DATA_API_KEY": "pub_a57ef064e7454f91a77e2b879334fe88",
-      "eas": {
-        "projectId": "SEU_PROJECT_ID_AQUI" // Se você estiver usando EAS
-      }
-    },
-    "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./src/assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
-          "dark": {
-            "backgroundColor": "#000000"
-          }
+      // "android": {
+      //   "adaptiveIcon": {
+      //     "backgroundColor": "#E6F4FE",
+      //     "foregroundImage": "./src/assets/images/android-icon-foreground.png"
+      //     // "backgroundImage": "./src/assets/images/android-icon-background.png",
+      //     // "monochromeImage": "./src/assets/images/android-icon-monochrome.png"
+      //   },
+      //   "edgeToEdgeEnabled": true,
+      //   "predictiveBackGestureEnabled": false
+      // },
+      "android": {
+        "adaptiveIcon": {
+          // "foregroundImage": "./src/assets/images/android-icon-foreground.png",
+          "backgroundColor": "#1E1E1E"
+        },
+        "edgeToEdgeEnabled": true,
+        "predictiveBackGestureEnabled": false
+      },
+      "web": {
+        "output": "static",
+        "favicon": "./src/assets/images/favicon.png",
+        "bundler": "metro"
+      },
+      "extra": {
+        "NEWS_DATA_API_KEY": "pub_58c542b3e0e142eebff6d38fb0ec538d",
+        "eas": {
+          "projectId": "SEU_PROJECT_ID_AQUI" // Se você estiver usando EAS
         }
-      ]
-    ],
-    "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
+      },
+      // "plugins": [
+      //   "expo-router",
+      //   [
+      //     "expo-splash-screen",
+      //     {
+      //       "image": "./src/assets/images/splash-icon.png",
+      //       "imageWidth": 200,
+      //       "resizeMode": "contain",
+      //       "backgroundColor": "#ffffff",
+      //       "dark": {
+      //         "backgroundColor": "#000000"
+      //       }
+      //     }
+      //   ]
+      // ],
+      "plugins": [
+        [
+          "expo-splash-screen",
+          {
+            "image": "./src/assets/images/splash-icon.png",
+            "imageWidth": 300,
+            "resizeMode": "contain",
+            "backgroundColor": "#F59E0B",
+            "dark": {
+              "backgroundColor": "#1F2937"
+            }
+          }
+        ]
+      ],
+      "experiments": {
+        "typedRoutes": true,
+        "reactCompiler": true
+      }
     }
   }
-}

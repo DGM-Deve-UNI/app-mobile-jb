@@ -1,3 +1,4 @@
+// Componente NewsCard para exibir um cartão de notícia com suporte a temas claro e escuro
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";

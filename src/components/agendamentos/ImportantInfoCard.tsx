@@ -1,4 +1,4 @@
-// src/components/agendamentos/ImportantInfoCard.tsx
+// Componente ImportantInfoCard para exibir informações importantes com suporte a temas claro e escuro
 import React from "react";
 import { View, Text } from "react-native";
 

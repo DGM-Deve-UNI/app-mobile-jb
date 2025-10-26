@@ -1,76 +1,83 @@
-// // src/contexts/ThemeContext.tsx
-// import React, { createContext, useContext, useState, useEffect } from 'react';
-// import { Appearance } from 'react-native';
+// Tema claro e escuro usando Context API com detecção automática do tema do sistema
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+import { Appearance, ColorSchemeName } from "react-native";
 
-// interface ThemeContextType {
-//   isDark: boolean;
-//   toggleTheme: () => void;
-//   setDark: (dark: boolean) => void;
-// }
-
-// const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-// export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-//   const [isDark, setIsDark] = useState<boolean>(false);
-
-//   useEffect(() => {
-//     // Detecta o tema do sistema automaticamente
-//     const colorScheme = Appearance.getColorScheme();
-//     setIsDark(colorScheme === 'dark');
-    
-//     const subscription = Appearance.addChangeListener(({ colorScheme }) => {
-//       setIsDark(colorScheme === 'dark');
-//     });
-
-//     return () => subscription.remove();
-//   }, []);
-
-//   const toggleTheme = () => setIsDark(!isDark);
-//   const setDark = (dark: boolean) => setIsDark(dark);
-
-//   const value: ThemeContextType = {
-//     isDark,
-//     toggleTheme,
-//     setDark,
-//   };
-
-//   return (
-//     <ThemeContext.Provider value={value}>
-//       {children}
-//     </ThemeContext.Provider>
-//   );
-// };
-
-// export const useTheme = (): ThemeContextType => {
-//   const context = useContext(ThemeContext);
-//   if (context === undefined) {
-//     throw new Error('useTheme must be used within a ThemeProvider');
-//   }
-//   return context;
-// };
-
-// src/contexts/ThemeContext.tsx
-import React, { createContext, useContext, useState, useEffect } from 'react';
+interface ThemeColors {
+  background: string;
+  text: string;
+  primary: string;
+  secondary: string;
+  border: string;
+  tabActive: string;
+  tabInactive: string;
+}
 
 interface ThemeContextType {
   isDark: boolean;
   toggleTheme: () => void;
+  setDark: (dark: boolean) => void;
+  colors: ThemeColors;
 }
 
-export const ThemeContext = createContext<ThemeContextType>({} as ThemeContextType);
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [isDark, setIsDark] = useState(false);
 
-  const toggleTheme = () => {
-    setIsDark(prev => !prev);
+  useEffect(() => {
+    const currentScheme = Appearance.getColorScheme();
+    setIsDark(currentScheme === "dark");
+
+    const subscription = Appearance.addChangeListener(
+      ({ colorScheme }: { colorScheme: ColorSchemeName }) => {
+        setIsDark(colorScheme === "dark");
+      }
+    );
+
+    return () => subscription.remove();
+  }, []);
+
+  const toggleTheme = () => setIsDark((prev) => !prev);
+  const setDark = (dark: boolean) => setIsDark(dark);
+
+  // 🎨 Definição de paletas de cores
+  const lightColors: ThemeColors = {
+    background: "#FFFFFF",
+    text: "#111827",
+    primary: "#D97706",
+    secondary: "#FBBF24",
+    border: "#E5E7EB",
+    tabActive: "#D97706",
+    tabInactive: "#6B7280",
   };
 
+  const darkColors: ThemeColors = {
+    background: "#1F2937",
+    text: "#F9FAFB",
+    primary: "#F59E0B",
+    secondary: "#FCD34D",
+    border: "#374151",
+    tabActive: "#F59E0B",
+    tabInactive: "#9CA3AF",
+  };
+
+  const colors = isDark ? darkColors : lightColors;
+
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+    <ThemeContext.Provider value={{ isDark, toggleTheme, setDark, colors }}>
       {children}
     </ThemeContext.Provider>
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+export const useTheme = (): ThemeContextType => {
+  const context = useContext(ThemeContext);
+  if (!context) throw new Error("useTheme must be used within a ThemeProvider");
+  return context;
+};

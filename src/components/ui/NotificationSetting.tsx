@@ -1,4 +1,4 @@
-// components/NotificationSetting.tsx
+// Componente NotificationSetting para exibir uma configuração de notificação com suporte a temas claro e escuro
 import React from "react";
 import { View, Text, Switch } from "react-native";
 

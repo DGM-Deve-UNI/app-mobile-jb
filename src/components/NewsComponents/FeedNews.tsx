@@ -1,3 +1,4 @@
+// Componente FeedNews para exibir um feed de notícias com suporte a temas claro e escuro
 import "@/src/styles/global.css";
 import React, { useState, useEffect, useCallback } from "react";
 import NewsCard from "@/src/components/NewsComponents/NewsCard";
@@ -13,11 +14,17 @@ import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import Constants from "expo-constants";
 import { NewsItem, NewsApiItem } from "@/src/types/news";
 import { useTheme } from "@/src/contexts/ThemeContext";
+
 // -----------------------------------------------------------------------------
 // Chave de API
 const API_KEY = Constants.expoConfig?.extra?.NEWS_DATA_API_KEY;
 const API_URL = `https://newsdata.io/api/1/news?apikey=${API_KEY}&language=pt&country=br`;
-// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Flag para desligar a API enquanto testa
+const DISABLE_API = true; // true = API desligada, false = API ligada
+
+// -----------------------------------------------------------------------------
 // Transforma o item da API no formato interno
 const mapApiToNewsItem = (apiItem: NewsApiItem, index: number): NewsItem => ({
   id: apiItem.article_id || `fallback-id-${index}`, // 👈 Garante key única
@@ -29,6 +36,7 @@ const mapApiToNewsItem = (apiItem: NewsApiItem, index: number): NewsItem => ({
   date: new Date(apiItem.pubDate).toLocaleDateString("pt-BR"),
 });
 
+// =============================================================================
 export default function FeedNews() {
   const { isDark } = useTheme();
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -48,6 +56,12 @@ export default function FeedNews() {
     if (!isRefresh) setLoading(true);
 
     try {
+      if (DISABLE_API) {
+        console.log("API desligada. Nenhuma requisição será feita.");
+        setNews([]); // ⬅️ pode manter o último estado se quiser
+        return;
+      }
+
       const response = await fetch(API_URL);
       if (!response.ok)
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -81,13 +95,14 @@ export default function FeedNews() {
     setRefreshing(true);
     fetchNews(true);
   }, [fetchNews]);
+
   // =============================================================================
   return (
     <ScrollView
-      className={`flex-1 px-5 py-4 ${isDark ? "bg-gray-900" : "bg-white"}`}
       contentContainerStyle={{
-        paddingBottom: tabBarHeight + insets.bottom + 24,
+        paddingBottom: tabBarHeight + insets.bottom + 1,
       }}
+      className={`p-5 ${isDark ? "bg-gray-900" : "bg-white"}`}
       refreshControl={
         <RefreshControl
           refreshing={refreshing}
@@ -106,7 +121,7 @@ export default function FeedNews() {
       </Text>
 
       {loading ? (
-        <View className="flex-1 justify-center items-center py-10">
+        <View className="items-center py-10">
           <ActivityIndicator
             size="large"
             color={isDark ? "#eab308" : "#2563eb"}
@@ -124,7 +139,7 @@ export default function FeedNews() {
           <NewsCard key={item.id} news={item} isDark={isDark} />
         ))
       ) : (
-        <View className="py-10 flex items-center">
+        <View className="items-center py-10">
           <Text
             className={`text-xl font-semibold ${
               isDark ? "text-gray-400" : "text-gray-500"
@@ -158,7 +173,7 @@ export default function FeedNews() {
               isDark ? "text-gray-500" : "text-gray-400"
             }`}
           >
-            Arraste para atualizar
+            Puxe do topo para atualizar
           </Text>
         </View>
       )}

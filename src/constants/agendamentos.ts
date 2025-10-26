@@ -1,4 +1,4 @@
-// src/constants/agendamentos.ts
+// Constantes para opções de agendamento
 export const SERVICOS_OPTIONS = [
   {
     label: "Corte Masculino - R$ 35,00",

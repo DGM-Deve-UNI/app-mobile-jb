@@ -1,4 +1,4 @@
-// components/BaseModal.tsx
+// Modal base reutilizável com suporte a temas claro e escuro
 import React from "react";
 import { Modal, View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

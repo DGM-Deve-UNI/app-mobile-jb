@@ -1,4 +1,4 @@
-// src/components/agendamentos/ProgressIndicator.tsx
+// Indicador de Progresso para Agendamentos
 import React from "react";
 import { View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

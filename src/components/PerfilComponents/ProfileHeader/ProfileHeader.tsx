@@ -1,3 +1,4 @@
+// Componente ProfileHeader para exibir o cabeçalho do perfil com suporte a temas claro e escuro
 import React from "react";
 import { View, Text } from "react-native";
 import { useTheme } from "@/src/contexts/ThemeContext";

@@ -1,4 +1,4 @@
-// components/FormInput.tsx
+// Componente FormInput para entrada de formulários com suporte a temas claro e escuro
 import React from "react";
 import { TextInput, Text, View } from "react-native";
 
